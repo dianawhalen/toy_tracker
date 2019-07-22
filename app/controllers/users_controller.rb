@@ -18,13 +18,7 @@ class UsersController < ApplicationController
 
   # POST: /login
   post "/login" do
-   user = User.find_by(:username => params[:username])
-   if user != nil
-     session[:user_id] = user.id
-     redirect "/users"
-   else
-     redirect to "/signup"
-   end
+    "Logged In"
   end
 
   # GET: /users
