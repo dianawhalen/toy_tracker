@@ -1,13 +1,30 @@
 class UsersController < ApplicationController
 
+  # GET: /signup
+  get "/signup" do
+    erb :"/users/new.html"
+  end
+
+  # POST: /signup
+  post "/signup" do
+    "Signed Up"
+    binding.pry
+  end
+
   # GET: /login
   get "/login" do
     erb :"users/login.html"
   end
 
-  # GET: /signup
-  get "/signup" do
-    erb :"/users/new.html"
+  # POST: /login
+  post "/login" do
+   user = User.find_by(:username => params[:username])
+   if user != nil
+     session[:user_id] = user.id
+     redirect "/users"
+   else
+     redirect to "/signup"
+   end
   end
 
   # GET: /users
