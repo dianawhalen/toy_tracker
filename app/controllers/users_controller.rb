@@ -7,8 +7,10 @@ class UsersController < ApplicationController
 
   # POST: /signup
   post "/signup" do
-    "Signed Up"
-    binding.pry
+    @user = User.new(:username => params[:username], :email => params[:email])
+    @user.save
+    session[:user_id] = @user.id
+    redirect "/users"
   end
 
   # GET: /login
