@@ -2,12 +2,12 @@ class UsersController < ApplicationController
 
   # GET: /signup
   get "/signup" do
-    erb :"/users/new.html"
+    erb :"/users/signup.html"
   end
 
   # POST: /signup
   post "/signup" do
-    @user = User.new(:username => params[:username], :email => params[:email])
+    @user = User.create(:username => params[:username], :email => params[:email])
     @user.save
     session[:user_id] = @user.id
     redirect "/users"
@@ -20,13 +20,19 @@ class UsersController < ApplicationController
 
   # POST: /login
   post "/login" do
-    @user = User.find_by(:username => params[:username])
-    if @user != nil
-      session[:user_id] = @user.id
+    user = User.find_by(:username => params[:username])
+    if user != nil
+      session[:user_id] = user.id
       redirect "/users"
     else
       redirect to "/signup"
     end
+  end
+
+  # GET: /logout
+  get "/logout" do
+    session.destroy
+    redirect "/login"
   end
 
   # GET: /users
