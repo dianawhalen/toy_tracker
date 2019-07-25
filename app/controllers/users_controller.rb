@@ -7,10 +7,14 @@ class UsersController < ApplicationController
 
   # POST: /signup
   post "/signup" do
-    @user = User.create(:username => params[:username], :email => params[:email])
+    @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
     @user.save
     session[:user_id] = @user.id
-    redirect "/users"
+    if @user.save
+      redirect "/users"
+    else
+      redirect "/signup"
+    end
   end
 
   # GET: /login
@@ -19,13 +23,13 @@ class UsersController < ApplicationController
   end
 
   # POST: /login
-  post "/login" do
-    user = User.find_by(:username => params[:username])
-    if user != nil
-      session[:user_id] = user.id
+  post '/login' do
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
       redirect "/users"
     else
-      redirect to "/signup"
+      redirect "/signup"
     end
   end
 
