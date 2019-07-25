@@ -41,7 +41,11 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
-    erb :"/users/index.html"
+    if session[:user_id]
+      erb :"/users/index.html"
+    else
+      redirect "/login"
+    end
   end
 
   # POST: /users
@@ -51,12 +55,20 @@ class UsersController < ApplicationController
 
   # GET: /users/5
   get "/users/:id" do
-    erb :"/users/show.html"
+    if session[:user_id]
+      erb :"/users/show.html"
+    else
+      redirect "/login"
+    end
   end
 
   # GET: /users/5/edit
   get "/users/:id/edit" do
-    erb :"/users/edit.html"
+    if session[:user_id]
+      erb :"/users/edit.html"
+    else
+      redirect "/login"
+    end
   end
 
   # PATCH: /users/5
