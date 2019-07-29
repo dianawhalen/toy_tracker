@@ -2,7 +2,11 @@ class ToysController < ApplicationController
 
   # GET: /toys
   get "/toys" do
-    erb :"/toys/index.html"
+    if session[:user_id]
+      erb :"/toys/index.html"
+    else
+      redirect "/login"
+    end
   end
 
   # GET: /toys/new
