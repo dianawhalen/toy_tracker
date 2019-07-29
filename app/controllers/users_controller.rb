@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET: /profile
   get "/profile" do
     @current_user = User.find_by_id(session[:user_id])
     if @current_user
@@ -64,6 +65,7 @@ class UsersController < ApplicationController
 
   # GET: /users/5
   get "/users/:id" do
+    @user = User.find_by_id(params[:id])
     if session[:user_id]
       erb :"/users/show.html"
     else
