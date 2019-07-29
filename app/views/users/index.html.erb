@@ -3,4 +3,8 @@
 <% if logged_in? %>
   <h3>Welcome, <%= current_user.username.capitalize %>!</h3>
 
+  <a class="button" href="/toys/new">Add Toy</a>
+
+  <a class="button" href="/toys">View Collection</a>
+
 <% end %>
