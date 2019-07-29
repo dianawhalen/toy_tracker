@@ -33,6 +33,15 @@ class UsersController < ApplicationController
     end
   end
 
+  get "/profile" do
+    @current_user = User.find_by_id(session[:user_id])
+    if @current_user
+      redirect "/users/#{@current_user.id}"
+    else
+      redirect "/users"
+    end
+  end
+
   # GET: /logout
   get "/logout" do
     session.destroy
