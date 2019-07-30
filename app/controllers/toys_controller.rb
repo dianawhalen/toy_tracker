@@ -3,7 +3,6 @@ class ToysController < ApplicationController
   # GET: /toys
   get "/toys" do
     if session[:user_id]
-      @toys = Toy.all
       erb :"/toys/index.html"
     else
       redirect "/login"

@@ -1,7 +1,14 @@
 <h2>This is the User Model's index page.</h2>
 
 <% if logged_in? %>
-  <h3>Welcome, <%= current_user.username.capitalize %>!</h3>
+  <h2>Welcome, <%= current_user.username.capitalize %>!</h2>
+
+<h3>All Users</h3>
+  <ul>
+    <% User.all.each do |user| %>
+      <li><a href="/users/<%= user.id %>"><%= user.username %></a></li><br>
+    <% end %>
+  </ul>
 
   <a class="button" href="/toys/new">Add Toy</a>
 
