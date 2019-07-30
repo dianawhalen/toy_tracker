@@ -3,6 +3,7 @@ class ToysController < ApplicationController
   # GET: /toys
   get "/toys" do
     if session[:user_id]
+      @toys = Toy.all
       erb :"/toys/index.html"
     else
       redirect "/login"
@@ -16,6 +17,7 @@ class ToysController < ApplicationController
 
   # POST: /toys
   post "/toys" do
+    Toy.create(name: params[:toy][:name])
     redirect "/toys"
   end
 

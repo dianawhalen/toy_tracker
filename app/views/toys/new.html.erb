@@ -1,1 +1,11 @@
 <h1>Insert the form to create a new instance of your model.</h1>
+
+<h2>Create a New Toy</h2>
+
+<form action="/toys" method="post">
+
+  <label for="toy_name">Name</label><br>
+  <input id="toy_name" type="text" name="toy[name]" /><br>
+
+  <input type="submit" value="Create New Toy">
+</form>
