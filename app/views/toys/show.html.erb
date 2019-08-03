@@ -1,1 +1,9 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h2><%= @toy.name %></h2>
+
+<ul>
+  <% @toy.designers.each do |designer| %>
+    <li>designed by <%= designer.name %></li>
+  <% end %>
+</ul>
+
+<a href="/toys/<%=@toy.id%>/edit">Edit Toy</a>
