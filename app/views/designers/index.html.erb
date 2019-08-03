@@ -5,8 +5,8 @@
 
 <h3>All Designers</h3>
   <ul>
-    <% Designer.all.each do |toy| %>
-      <li><a href="/designers/<%= toy.id %>"><%= toy.name %></a></li><br>
+    <% Designer.all.each do |designer| %>
+      <li><a href="/designers/<%= designer.id %>"><%= designer.name %></a></li><br>
     <% end %>
   </ul>
 
