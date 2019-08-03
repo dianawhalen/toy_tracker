@@ -1,11 +1,28 @@
-<h1>Insert the form to create a new instance of your model.</h1>
-
 <h2>Create a New Toy</h2>
+
+Insert the form to create a new instance of your model. <br><br>
 
 <form action="/toys" method="post">
 
-  <label for="toy_name">Name</label><br>
-  <input id="toy_name" type="text" name="toy[name]" /><br>
+  <p><strong><label>Toy Name:</label></strong>
+  <input id="toy_name" type="text" name="toy[name]"></p>
+
+  <strong><label>Select Designer(s):</label></strong><br>
+  <ul>
+    <% Designer.all.each do |designer| %>
+      <label><%= designer.name %></label>
+      <input id="designer_<%=designer.id%>" type="checkbox" name="toy[designer_ids][]" value="<%= designer.id %>"><br>
+    <% end %>
+  </ul>
+
+  <br>
+  
+  <h4>Or create a new one:</h4><br>
+
+    <p><strong><label>Designer Name:</label></strong>
+    <input id="new_designer" type="text" name="designer[name]"></p>
+
+  <br>
 
   <input type="submit" value="Create New Toy">
 </form>

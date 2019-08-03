@@ -2,6 +2,7 @@ class DesignersController < ApplicationController
 
   # GET: /designers
   get "/designers" do
+    @designers = Designer.all
     erb :"/designers/index.html"
   end
 

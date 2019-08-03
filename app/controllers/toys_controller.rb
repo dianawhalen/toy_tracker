@@ -2,6 +2,7 @@ class ToysController < ApplicationController
 
   # GET: /toys
   get "/toys" do
+    @toys = Toy.all
     if session[:user_id]
       erb :"/toys/index.html"
     else
@@ -16,7 +17,12 @@ class ToysController < ApplicationController
 
   # POST: /toys
   post "/toys" do
-    Toy.create(name: params[:toy][:name])
+    @toy = Toy.create(params[:toy])
+    if params[:toy][:designer_ids].nil?
+      designer = Designer.create(name: params[:designer][:name])
+      @toy.designers << designer
+    end
+    @toy.save
     redirect "/toys"
   end
 

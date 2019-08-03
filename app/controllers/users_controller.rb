@@ -51,6 +51,7 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
+    @users = User.all
     if session[:user_id]
       erb :"/users/index.html"
     else
