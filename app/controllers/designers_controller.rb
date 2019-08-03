@@ -13,6 +13,7 @@ class DesignersController < ApplicationController
 
   # POST: /designers
   post "/designers" do
+    Designer.create(name: params[:designer][:name])
     redirect "/designers"
   end
 
