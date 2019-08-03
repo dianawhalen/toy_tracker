@@ -1,1 +1,15 @@
-<h1>This is the Model's index page.</h1>
+<h2>This is the Toy Model's index page.</h2>
+
+<% if logged_in? %>
+  <h3>Welcome, <%= current_user.username.capitalize %>!</h3>
+
+<h3>All Designers</h3>
+  <ul>
+    <% Designer.all.each do |toy| %>
+      <li><a href="/designers/<%= toy.id %>"><%= toy.name %></a></li><br>
+    <% end %>
+  </ul>
+
+  <a class="button" href="/designers/new">Add Designer</a>
+
+<% end %>
