@@ -18,7 +18,6 @@ class ToysController < ApplicationController
   # POST: /toys
   post "/toys" do
     @toy = Toy.create(name: params[:toy][:name], edition: params[:toy][:edition], designer: Designer.find_or_create_by(name: params[:designer][:name]))
-    binding.pry
     redirect "/toys"
   end
 
