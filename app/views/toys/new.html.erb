@@ -2,14 +2,17 @@
 
 <form action="/toys" method="post">
 
-  <p><strong><label>Toy Name:</label></strong>
+  <p><strong><label>Name:</label></strong>
   <input id="toy_name" type="text" name="toy[name]"></p>
 
-  <strong><label>Select Designer(s):</label></strong><br>
+  <p><strong><label>Edition:</label></strong>
+  <input id="toy_edition" type="text" name="toy[edition]"></p>
+
+  <strong><label>Select Designer:</label></strong><br>
   <ul>
     <% Designer.all.each do |designer| %>
       <label><%= designer.name %></label>
-      <input id="designer_<%=designer.id%>" type="checkbox" name="toy[designer_ids][]" value="<%= designer.id %>"><br>
+      <input id="designer_<%=designer.id%>" type="checkbox" name="designers[]" value="<%= designer.id %>"><br>
     <% end %>
   </ul>
 

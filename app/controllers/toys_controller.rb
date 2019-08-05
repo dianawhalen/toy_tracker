@@ -17,12 +17,8 @@ class ToysController < ApplicationController
 
   # POST: /toys
   post "/toys" do
-    @toy = Toy.create(params[:toy])
-    if params[:toy][:designer_id].nil?
-      designer = Designer.create(name: params[:designer][:name])
-      @toy.designers << designer
-    end
-    @toy.save
+    @toy = Toy.create(name: params[:toy][:name], edition: params[:toy][:edition], designer: Designer.find_or_create_by(name: params[:designer][:name]))
+    binding.pry
     redirect "/toys"
   end
 
