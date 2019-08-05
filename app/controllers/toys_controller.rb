@@ -16,10 +16,11 @@ class ToysController < ApplicationController
   end
 
   # POST: /toys
+  post "/toys" do
     @toy = Toy.create(params[:toy])
     if params[:toy][:designer_id].nil?
       designer = Designer.create(name: params[:designer][:name])
-
+      @toy.designers << designer
     end
     @toy.save
     redirect "/toys"

@@ -9,7 +9,7 @@
   <ul>
     <% Designer.all.each do |designer| %>
       <label><%= designer.name %></label>
-      <input id="designer_<%=designer.id%>" type="checkbox" name="toy[designer_id][]" value="<%= designer.id %>"><br>
+      <input id="designer_<%=designer.id%>" type="checkbox" name="toy[designer_ids][]" value="<%= designer.id %>"><br>
     <% end %>
   </ul>
 
