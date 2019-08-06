@@ -18,7 +18,12 @@ class ToysController < ApplicationController
   # POST: /toys
   post "/toys" do
     @toy = Toy.create(name: params[:toy][:name], edition: params[:toy][:edition], designer: Designer.find_or_create_by(name: params[:designer][:name]))
-    redirect "/toys"
+    redirect "toys/#{@toy.slug}"
+  end
+
+  get "/toys/:slug" do
+    @toy = Toy.find_by_slug(params[:slug])
+    erb :"/toys/show.html"
   end
 
   # GET: /toys/5

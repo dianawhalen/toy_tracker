@@ -1,9 +1,8 @@
-<h2><%= @toy.name %></h2>
+<h3><%= @toy.name %> (<%= @toy.edition %>)</h3>
 
-<ul>
-  <% @toy.designers.each do |designer| %>
-    <li>designed by <%= designer.name %></li>
-  <% end %>
-</ul>
+<h4>Designer</h4>
+  <p>
+    <a href="/designers/<%=@toy.designer.slug%>"><%=@toy.designer.name%></a>
+  </p>
 
 <a href="/toys/<%=@toy.id%>/edit">Edit Toy</a>
