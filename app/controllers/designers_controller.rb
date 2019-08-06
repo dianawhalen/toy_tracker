@@ -13,8 +13,10 @@ class DesignersController < ApplicationController
 
   # POST: /designers
   post "/designers" do
-    Designer.create(name: params[:designer][:name])
-    redirect "/designers"
+    @designer = Designer.create(name: params[:designer][:name])
+    @designer.save
+    slug = @designer.slug
+    redirect "designers/#{@designer.slug}"
   end
 
   # GET: /designers/5

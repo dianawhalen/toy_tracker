@@ -21,24 +21,23 @@ class ToysController < ApplicationController
     redirect "toys/#{@toy.slug}"
   end
 
+  # GET: /toys/5
   get "/toys/:slug" do
     @toy = Toy.find_by_slug(params[:slug])
     erb :"/toys/show.html"
   end
 
-  # GET: /toys/5
-  get "/toys/:id" do
-    erb :"/toys/show.html"
-  end
-
   # GET: /toys/5/edit
-  get "/toys/:id/edit" do
+  get "/toys/:slug/edit" do
+    @toy = Toy.find_by_slug(params[:slug])
     erb :"/toys/edit.html"
   end
 
   # PATCH: /toys/5
-  patch "/toys/:id" do
-    redirect "/toys/:id"
+  patch "/toys/:slug" do
+    @toy = Toy.find_by_slug(params[:slug])
+    @toy.update(name: params[:toy][:name], edition: params[:toy][:edition], designer: Designer.find_or_create_by(name: params[:designer][:name]))
+    redirect "toys/#{@toy.slug}"
   end
 
   # DELETE: /toys/5/delete

@@ -1,1 +1,32 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h3>Update an Existing Toy</h3>
+
+<form action="/toys/<%=@toy.slug%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <p>
+    <label>Name: </label>
+    <input id="toy_name" type="text" name="toy[name]" value="<%=@toy.name%>">
+  </p>
+
+  <p>
+    <label>Edition: </label>
+    <input id="toy_edition" type="text" name="toy[edition]" value="<%=@toy.edition%>">
+  </p>
+
+  <p>
+    <label>Designer Name: </label>
+    <input id="designer_name" type="text" name="designer[name]" value="<%=@toy.designer.name%>">
+  <p>
+
+  <strong><label>Select Designer:</label></strong><br>
+  <ul>
+    <% Designer.all.each do |designer| %>
+      <label><%= designer.name %></label>
+      <input id="designer_<%=designer.id%>" type="checkbox" name="designers[]" value="<%= designer.id %>"><br>
+    <% end %>
+  </ul>
+
+  <br>
+
+  <input type="submit" value="Save">
+</form>
