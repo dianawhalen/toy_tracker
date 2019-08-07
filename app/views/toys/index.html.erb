@@ -6,7 +6,7 @@
 <h3>All Toys</h3>
   <ul>
     <% Toy.all.each do |toy| %>
-      <li><a href="/toys/<%= toy.id %>"><%= toy.name %></a></li><br>
+      <li><a href="/toys/<%= toy.slug %>"><%= toy.name %></a></li><br>
     <% end %>
   </ul>
 
