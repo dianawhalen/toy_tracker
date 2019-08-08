@@ -8,6 +8,7 @@ class DesignersController < ApplicationController
 
   # GET: /designers/new
   get "/designers/new" do
+    @toys = Toy.all
     erb :"/designers/new.html"
   end
 

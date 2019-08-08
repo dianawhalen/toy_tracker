@@ -36,7 +36,12 @@ class ToysController < ApplicationController
   # PATCH: /toys/5
   patch "/toys/:slug" do
     @toy = Toy.find_by_slug(params[:slug])
-    @toy.update(name: params[:toy][:name], edition: params[:toy][:edition], designer: Designer.find_or_create_by(name: params[:designer][:name]))
+    if params[:designer][:name].empty?
+      @toy.update(params[:toy])
+    else
+      @new_designer = Designer.create(params[:designer])
+      @toy.update(name: params[:toy][:name], designer: @new_designer)
+    end
     redirect "toys/#{@toy.slug}"
   end
 

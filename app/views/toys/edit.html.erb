@@ -13,12 +13,11 @@
     <input id="toy_edition" type="text" name="toy[edition]" value="<%=@toy.edition%>">
   </p>
 
-  <label>Designer(s):</label><br>
+  <h4>Select a Designer:</h4><br>
 
-    <% Designer.all.each do |designer| %>
-      <label><%= designer.name %></label>
-      <input id="designer_<%=designer.id%>" type="checkbox" name="designers[]" value="<%= designer.id %>"> <%='checked' if @toy.designer %> <%=designer.name%><br>
-    <% end %>
+  <% Designer.all.each do |designer| %>
+   <input type="checkbox" name="toy[designer_id]" value="<%= designer.id %>" id="<%= designer.id %>" <%='checked' if @toy.designer == designer %>><label><%= designer.name %></label><br>
+  <% end %>
 
     <br>
 
