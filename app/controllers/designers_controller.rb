@@ -21,22 +21,23 @@ class DesignersController < ApplicationController
   end
 
   # GET: /designers/5
-  get "/designers/:id" do
+  get "/designers/:slug" do
+    @designer = Designer.find_by_slug(params[:slug])
     erb :"/designers/show.html"
   end
 
   # GET: /designers/5/edit
-  get "/designers/:id/edit" do
+  get "/designers/:slug/edit" do
     erb :"/designers/edit.html"
   end
 
   # PATCH: /designers/5
-  patch "/designers/:id" do
-    redirect "/designers/:id"
+  patch "/designers/:slug" do
+    redirect "/designers/:slug"
   end
 
   # DELETE: /designers/5/delete
-  delete "/designers/:id/delete" do
+  delete "/designers/:slug/delete" do
     redirect "/designers"
   end
 end
