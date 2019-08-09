@@ -1,15 +1,16 @@
-<h2>This is the Toy Model's index page.</h2>
+<h2>Designers</h2>
 
 <% if logged_in? %>
   <h3>Welcome, <%= current_user.username.capitalize %>!</h3>
 
-<h3>All Designers</h3>
+  <br>
+
+<h4>All Designer Entries:</h4>
   <ul>
     <% Designer.all.each do |designer| %>
-      <li><a href="/designers/<%= designer.id %>"><%= designer.name %></a></li><br>
+      <li><a href="/designers/<%= designer.slug %>"><%= designer.name %></a></li><br>
     <% end %>
   </ul>
 
   <a class="button" href="/designers/new">Add Designer</a>
-
 <% end %>

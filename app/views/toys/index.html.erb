@@ -1,9 +1,11 @@
-<h2>This is the Toy Model's index page.</h2>
+<h2>Toys</h2>
 
 <% if logged_in? %>
   <h3>Welcome, <%= current_user.username.capitalize %>!</h3>
 
-<h3>All Toys</h3>
+  <br>
+
+<h4>All Toy Entries:</h4>
   <ul>
     <% Toy.all.each do |toy| %>
       <li><a href="/toys/<%= toy.slug %>"><%= toy.name %></a></li><br>
