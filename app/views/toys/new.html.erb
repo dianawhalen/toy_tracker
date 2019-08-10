@@ -10,9 +10,8 @@
 
   <strong><label>Select Designer:</label></strong><br>
   <ul>
-    <% Designer.all.each do |designer| %>
-      <label><%= designer.name %></label>
-      <input id="designer_<%=designer.id%>" type="checkbox" name="designers[]" value="<%= designer.id %>"><br>
+    <% @designers.each do |designer| %>
+    <input type="checkbox" name="toy[designer_id]" id="<%=designer.id%>" value="<%= designer.id %>"> <%=designer.name%></input><br> 
     <% end %>
   </ul>
 

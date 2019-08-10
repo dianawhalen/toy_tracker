@@ -7,7 +7,7 @@
 
 <h4>All Designer Entries:</h4>
   <ul>
-    <% Designer.all.each do |designer| %>
+    <% @designers.each do |designer| %>
       <li><a href="/designers/<%= designer.slug %>"><%= designer.name %></a></li><br>
     <% end %>
   </ul>

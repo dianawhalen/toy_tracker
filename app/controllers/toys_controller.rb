@@ -12,12 +12,17 @@ class ToysController < ApplicationController
 
   # GET: /toys/new
   get "/toys/new" do
+    @designers = Designer.all
     erb :"/toys/new.html"
   end
 
   # POST: /toys
   post "/toys" do
-    @toy = Toy.create(name: params[:toy][:name], edition: params[:toy][:edition], designer: Designer.find_or_create_by(name: params[:designer][:name]))
+    @toy = Toy.create(params[:toy])
+    if !params[:designer][:name].empty?
+      @toy.designer = Designer.create(name: params[:designer][:name])
+    end
+    @toy.save
     redirect "toys/#{@toy.slug}"
   end
 

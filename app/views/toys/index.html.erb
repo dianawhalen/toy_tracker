@@ -7,8 +7,8 @@
 
 <h4>All Toy Entries:</h4>
   <ul>
-    <% Toy.all.each do |toy| %>
-      <li><a href="/toys/<%= toy.slug %>"><%= toy.name %></a></li><br>
+    <% @toys.each do |toy| %>
+      <li><a href="/toys/<%= toy.slug %>"><%= toy.name %> (<%= toy.edition %>)</a></li><br>
     <% end %>
   </ul>
 
