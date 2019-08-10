@@ -3,7 +3,10 @@ class CreateToys < ActiveRecord::Migration
     create_table :toys do |t|
       t.string :name
       t.string :edition
-      t.integer :designer_id
+      t.string :color
+      t.string :designer
+      t.string :brand
+      t.integer :user_id
       t.timestamps null: false
     end
   end
