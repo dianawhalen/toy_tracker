@@ -5,4 +5,10 @@
     <a href="/designers/<%=@toy.designer.slug%>"><%=@toy.designer.name%></a>
   </p>
 
+<form action="/toys/<%=@toy.slug%>/delete" method="post">
+  <input type="hidden" name="_method" value="DELETE" id="hidden">
+
+  <input type="submit" value="Delete Toy">
+</form>
+
 <a href="/toys/<%=@toy.slug%>/edit">Edit Toy</a>

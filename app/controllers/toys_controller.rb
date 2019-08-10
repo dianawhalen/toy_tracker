@@ -51,7 +51,10 @@ class ToysController < ApplicationController
   end
 
   # DELETE: /toys/5/delete
-  delete "/toys/:id/delete" do
+  delete "/toys/:slug/delete" do
+    @toy = Toy.find_by_slug(params[:slug])
+    @toy.delete
     redirect "/toys"
   end
+
 end
