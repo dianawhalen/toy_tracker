@@ -7,5 +7,4 @@ end
 use Rack::MethodOverride
 use UsersController
 use ToysController
-use DesignersController
 run ApplicationController
