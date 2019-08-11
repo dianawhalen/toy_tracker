@@ -1,14 +1,10 @@
-<h2>Users</h2>
-
 <% if logged_in? %>
-  <h3>Welcome, <%= current_user.username.capitalize %>!</h3>
-
-  <br>
+  <h2>Welcome, <%= current_user.username.capitalize %>!</h2>
 
 <h4>All Users:</h4>
   <ul>
     <% @users.each do |user| %>
-      <li><a href="/users/<%= user.id %>"><%= user.username %></a></li><br>
+      <li><a href="/users/<%= user.slug %>"><%= user.username.capitalize %></a></li><br>
     <% end %>
   </ul>
 

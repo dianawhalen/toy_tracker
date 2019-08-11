@@ -1,5 +1,15 @@
 class UsersController < ApplicationController
 
+  # GET: /users/5
+  get "/users/:slug" do
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
+      erb :"/users/show.html"
+    else
+      redirect "/login"
+    end
+  end
+
   # GET: /signup
   get "/signup" do
     if logged_in?
@@ -15,10 +25,10 @@ class UsersController < ApplicationController
       redirect "/signup"
     else
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-      @user.save
-      session[:user_id] = @user.id
-      redirect "/toys"
     end
+    @user.save
+    session[:user_id] = @user.id
+    redirect "/users/#{@user.slug}"
   end
 
   # GET: /login
@@ -31,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   # POST: /login
-  post '/login' do
+  post "/login" do
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
@@ -63,8 +73,8 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
-    @users = User.all
-    if session[:user_id]
+    if logged_in?
+      @users = User.all
       erb :"/users/index.html"
     else
       redirect "/login"
@@ -74,16 +84,6 @@ class UsersController < ApplicationController
   # POST: /users
   post "/users" do
     redirect "/users"
-  end
-
-  # GET: /users/5
-  get "/users/:id" do
-    @user = User.find_by_id(params[:id])
-    if session[:user_id]
-      erb :"/users/show.html"
-    else
-      redirect "/login"
-    end
   end
 
   # GET: /users/5/edit
@@ -104,4 +104,5 @@ class UsersController < ApplicationController
   delete "/users/:id/delete" do
     redirect "/users"
   end
+
 end
