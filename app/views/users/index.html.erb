@@ -7,11 +7,10 @@
 
 <h4>All Users:</h4>
   <ul>
-    <% User.all.each do |user| %>
+    <% @users.each do |user| %>
       <li><a href="/users/<%= user.id %>"><%= user.username %></a></li><br>
     <% end %>
   </ul>
 
   <a class="button" href="/toys/new">Add Toy</a>
-  <a class="button" href="/designers/new">Add Designer</a>
 <% end %>

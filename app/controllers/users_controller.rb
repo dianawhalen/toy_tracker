@@ -2,24 +2,32 @@ class UsersController < ApplicationController
 
   # GET: /signup
   get "/signup" do
-    erb :"/users/signup.html"
+    if logged_in?
+      redirect "toys"
+    else
+      erb :"/users/signup.html"
+    end
   end
 
   # POST: /signup
   post "/signup" do
-    @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
-    @user.save
-    session[:user_id] = @user.id
-    if @user.save
-      redirect "/users"
-    else
+    if params[:username].blank? || params[:email].blank? || params[:password].blank?
       redirect "/signup"
+    else
+      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect "/toys"
     end
   end
 
   # GET: /login
   get "/login" do
-    erb :"users/login.html"
+    if logged_in?
+      redirect "/toys"
+    else
+      erb :"users/login.html"
+    end
   end
 
   # POST: /login
@@ -27,7 +35,7 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect "/users"
+      redirect "/toys"
     else
       redirect "/signup"
     end
@@ -45,8 +53,12 @@ class UsersController < ApplicationController
 
   # GET: /logout
   get "/logout" do
-    session.destroy
-    redirect "/login"
+    if logged_in?
+      session.destroy
+      redirect "/login"
+    else
+      redirect "/"
+    end
   end
 
   # GET: /users
