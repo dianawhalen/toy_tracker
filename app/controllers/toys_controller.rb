@@ -1,6 +1,8 @@
 require 'rack-flash'
 
 class ToysController < ApplicationController
+  enable :sessions
+  use Rack::Flash
 
   # GET: /toys
   get "/toys" do
@@ -39,7 +41,12 @@ class ToysController < ApplicationController
   # GET: /toys/5/edit
   get "/toys/:slug/edit" do
     @toy = Toy.find_by_slug(params[:slug])
-    erb :"/toys/edit.html"
+    if @toy.user == current_user
+      erb :"/toys/edit.html"
+    else
+      flash[:message] = "You cannot edit another user's Toy entry."
+      # redirect "toys/#{@toy.slug}"
+    end
   end
 
   # PATCH: /toys/5

@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h2>Update an Existing Toy</h2>
 
 <form action="/toys/<%=@toy.slug%>" method="post">

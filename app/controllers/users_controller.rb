@@ -1,6 +1,8 @@
 require 'rack-flash'
 
 class UsersController < ApplicationController
+  enable :sessions
+  use Rack::Flash
 
   # GET: /users/5
   get "/users/:slug" do

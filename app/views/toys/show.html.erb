@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h2><%= @toy.name %></h2>
 
   <p><strong>Edition: </strong><%= @toy.edition %></p>
