@@ -4,20 +4,10 @@ class UsersController < ApplicationController
   enable :sessions
   use Rack::Flash
 
-  # GET: /users/5
-  get "/users/:slug" do
-    if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      erb :"/users/show.html"
-    else
-      redirect "/login"
-    end
-  end
-
   # GET: /signup
   get "/signup" do
     if logged_in?
-      redirect "toys"
+      redirect "/toys"
     else
       erb :"/users/signup.html"
     end
@@ -90,10 +80,25 @@ class UsersController < ApplicationController
     redirect "/users"
   end
 
+  # GET: /users/5
+  get "/users/:slug" do
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
+      erb :"/users/show.html"
+    else
+      redirect "/login"
+    end
+  end
+
   # GET: /users/5/edit
-  get "/users/:id/edit" do
-    if session[:user_id]
-      erb :"/users/edit.html"
+  get "/users/:slug/edit" do
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
+      if @user == current_user
+        erb :"/users/edit.html"
+      else
+        flash[:message] = "You cannot edit another user's profile."
+      end
     else
       redirect "/login"
     end
