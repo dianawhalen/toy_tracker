@@ -22,8 +22,9 @@ class ToysController < ApplicationController
 
   # POST: /toys
   post "/toys" do
+    @user = User.find_by_id(session[:user_id])
     @toy = Toy.create(params[:toy])
-    binding.pry
+    @user.toys << @toy
     redirect "toys/#{@toy.slug}"
   end
 
