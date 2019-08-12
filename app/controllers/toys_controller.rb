@@ -3,7 +3,7 @@ class ToysController < ApplicationController
   # GET: /toys
   get "/toys" do
     @toys = Toy.all
-    if session[:user_id]
+    if logged_in?
       erb :"/toys/index.html"
     else
       redirect "/login"
@@ -12,17 +12,18 @@ class ToysController < ApplicationController
 
   # GET: /toys/new
   get "/toys/new" do
-    @designers = Designer.all
-    erb :"/toys/new.html"
+    @user = User.find_by_id(session[:user_id])
+    if logged_in?
+      erb :"/toys/new.html"
+    else
+      redirect "/login"
+    end
   end
 
   # POST: /toys
   post "/toys" do
     @toy = Toy.create(params[:toy])
-    if !params[:designer][:name].empty?
-      @toy.designer = Designer.create(name: params[:designer][:name])
-    end
-    @toy.save
+    binding.pry
     redirect "toys/#{@toy.slug}"
   end
 

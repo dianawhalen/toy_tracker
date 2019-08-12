@@ -8,21 +8,17 @@
   <p><strong><label>Edition:</label></strong>
   <input id="toy_edition" type="text" name="toy[edition]"></p>
 
-  <strong><label>Select Designer:</label></strong><br>
-  <ul>
-    <% @designers.each do |designer| %>
-    <input type="checkbox" name="toy[designer_id]" id="<%=designer.id%>" value="<%= designer.id %>"> <%=designer.name%></input><br> 
-    <% end %>
-  </ul>
+  <p><strong><label>Color:</label></strong>
+  <input id="toy_color" type="text" name="toy[color]"></p>
 
-  <br>
+  <p><strong><label>Designer:</label></strong>
+  <input id="toy_designer" type="text" name="toy[designer]"></p>
 
-  <h4>Or create a new one:</h4><br>
+  <p><strong><label>Brand:</label></strong>
+  <input id="toy_brand" type="text" name="toy[brand]"></p>
 
-    <p><strong><label>Designer Name:</label></strong>
-    <input id="new_designer" type="text" name="designer[name]"></p>
-
-  <br>
+  <p><strong><label>Add to Collection?</label></strong>
+  <input type="checkbox" name="toy[user_id]" id="<%=@user.id%>" value="<%=@user.id%>"> <%=@user.name%></input><br>
 
   <input type="submit" value="Create New Toy">
 </form>
