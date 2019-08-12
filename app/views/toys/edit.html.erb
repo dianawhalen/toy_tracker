@@ -1,4 +1,4 @@
-<h3>Update an Existing Toy</h3>
+<h2>Update an Existing Toy</h2>
 
 <form action="/toys/<%=@toy.slug%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
@@ -13,20 +13,21 @@
     <input id="toy_edition" type="text" name="toy[edition]" value="<%=@toy.edition%>">
   </p>
 
-  <h4>Select a Designer:</h4><br>
+  <p>
+    <label>Color: </label>
+    <input id="toy_color" type="text" name="toy[color]" value="<%=@toy.color%>">
+  </p>
 
-  <% Designer.all.each do |designer| %>
-   <input type="checkbox" name="toy[designer_id]" value="<%= designer.id %>" id="<%= designer.id %>" <%='checked' if @toy.designer == designer %>><label><%= designer.name %></label><br>
-  <% end %>
+  <p>
+    <label>Designer: </label>
+    <input id="toy_designer" type="text" name="toy[designer]" value="<%=@toy.designer%>">
+  </p>
 
-    <br>
+  <p>
+    <label>Brand: </label>
+    <input id="toy_brand" type="text" name="toy[brand]" value="<%=@toy.brand%>">
+  </p>
 
-    <h4>Or create a new one:</h4><br>
-
-      <p><strong><label>Designer Name:</label></strong>
-      <input id="new_designer" type="text" name="designer[name]"></p>
-
-    <br>
 
   <input type="submit" value="Save">
 </form>
