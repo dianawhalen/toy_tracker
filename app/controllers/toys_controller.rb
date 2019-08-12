@@ -16,8 +16,8 @@ class ToysController < ApplicationController
 
   # GET: /toys/new
   get "/toys/new" do
-    @user = User.find_by_id(session[:user_id])
     if logged_in?
+      @user = User.find_by_id(session[:user_id])
       erb :"/toys/new.html"
     else
       redirect "/login"
