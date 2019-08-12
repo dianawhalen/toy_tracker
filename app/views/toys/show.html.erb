@@ -1,9 +1,10 @@
-<h2><%= @toy.name %> (<%= @toy.edition %>)</h2>
+<h2><%= @toy.name %></h2>
 
-<h4>Designer:</h4>
-  <p>
-    <a href="/designers/<%=@toy.designer.slug%>"><%=@toy.designer.name%></a>
-  </p>
+  <p><strong>Edition: </strong><%= @toy.edition %></p>
+  <p><strong>Color: </strong><%= @toy.color %></p>
+  <p><strong>Designer: </strong><%= @toy.designer %></p>
+  <p><strong>Brand: </strong><%= @toy.brand %></p>
+
 
 <form action="/toys/<%=@toy.slug%>/delete" method="post">
   <input type="hidden" name="_method" value="DELETE" id="hidden">
