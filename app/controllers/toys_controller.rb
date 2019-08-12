@@ -59,8 +59,12 @@ class ToysController < ApplicationController
   # DELETE: /toys/5/delete
   delete "/toys/:slug/delete" do
     @toy = Toy.find_by_slug(params[:slug])
-    @toy.delete
-    redirect "/toys"
+    if @toy.user != current_user
+      flash[:message] = "You cannot delete another user's Toy entry."
+    else
+      @toy.delete
+      redirect "/toys"
+    end
   end
 
 end
