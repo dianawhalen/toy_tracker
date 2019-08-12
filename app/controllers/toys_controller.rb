@@ -1,3 +1,5 @@
+require 'rack-flash'
+
 class ToysController < ApplicationController
 
   # GET: /toys

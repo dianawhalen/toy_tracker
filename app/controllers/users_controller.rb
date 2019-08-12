@@ -1,3 +1,5 @@
+require 'rack-flash'
+
 class UsersController < ApplicationController
 
   # GET: /users/5
