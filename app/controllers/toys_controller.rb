@@ -44,12 +44,16 @@ class ToysController < ApplicationController
 
   # GET: /toys/5/edit
   get "/toys/:slug/edit" do
-    @toy = Toy.find_by_slug(params[:slug])
-    if @toy.user == current_user
-      erb :"/toys/edit.html"
+    if logged_in?
+      @toy = Toy.find_by_slug(params[:slug])
+      if @toy.user == current_user
+        erb :"/toys/edit.html"
+      else
+        flash[:message] = "You cannot edit another user's Toy entry."
+        # redirect "toys/#{@toy.slug}"
+      end
     else
-      flash[:message] = "You cannot edit another user's Toy entry."
-      # redirect "toys/#{@toy.slug}"
+      redirect "/login"
     end
   end
 
