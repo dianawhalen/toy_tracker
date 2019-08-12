@@ -34,8 +34,12 @@ class ToysController < ApplicationController
 
   # GET: /toys/5
   get "/toys/:slug" do
-    @toy = Toy.find_by_slug(params[:slug])
-    erb :"/toys/show.html"
+    if logged_in?
+      @toy = Toy.find_by_slug(params[:slug])
+      erb :"/toys/show.html"
+    else
+      redirect "/login"
+    end
   end
 
   # GET: /toys/5/edit
