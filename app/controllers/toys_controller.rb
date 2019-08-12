@@ -6,8 +6,8 @@ class ToysController < ApplicationController
 
   # GET: /toys
   get "/toys" do
-    @toys = Toy.all
     if logged_in?
+      @toys = Toy.all
       erb :"/toys/index.html"
     else
       redirect "/login"
