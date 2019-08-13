@@ -1,0 +1,26 @@
+<h2>My Account</h2>
+
+  <ul>
+    <li><b>My Username: </b><%= @user.username.capitalize %></li><br>
+    <li><b>My Email: </b><%= @user.email %></li><br>
+  </ul>
+
+<button onclick="window.location.href = '/users/<%=@user.slug%>/edit';">Edit Account</button>
+
+<button onclick="window.location.href = '/users/<%=@user.slug%>/edit';">Edit Account</button>
+
+<form action="/users/<%=@user.slug%>/delete" method="post">
+  <input type="hidden" name="_method" value="DELETE" id="hidden">
+
+  <input type="submit" value="Delete Account">
+</form>
+
+<h4>My Toy(s):</h4>
+  <ul>
+    <% @user.toys.each do |toy| %>
+      <li><a href="/toys/<%=toy.slug%>"><%=toy.name%></a></li>
+    <% end %>
+  </ul>
+
+
+<br>

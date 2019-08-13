@@ -45,13 +45,13 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET: /profile
-  get "/profile" do
-    @current_user = User.find_by_id(session[:user_id])
-    if @current_user
-      redirect "/users/#{@current_user.id}"
+  # GET: /account
+  get "/account" do
+    if logged_in?
+      @user = current_user
+      erb :"/users/account.html"
     else
-      redirect "/users"
+      redirect "/login"
     end
   end
 
