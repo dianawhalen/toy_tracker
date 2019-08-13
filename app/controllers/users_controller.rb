@@ -115,9 +115,11 @@ class UsersController < ApplicationController
   delete "/users/:slug/delete" do
     @user = User.find_by_slug(params[:slug])
     if @user != current_user
-      flash[:message] = "You cannot delete another user's Profile."
+      redirect "/users/#{@user.slug}"
     else
+      @user.toys.delete
       @user.delete
+      session.destroy
       redirect "/"
     end
   end

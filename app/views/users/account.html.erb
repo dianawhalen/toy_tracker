@@ -7,20 +7,21 @@
 
 <button onclick="window.location.href = '/users/<%=@user.slug%>/edit';">Edit Account</button>
 
-<button onclick="window.location.href = '/users/<%=@user.slug%>/edit';">Edit Account</button>
+<br><br>
+
+<h4>My Toy Collection:</h4>
+<p>
+  <ul type="square">
+    <% @user.toys.each do |toy| %>
+      <li><a href="/toys/<%=toy.slug%>"><%=toy.name%></a></li>
+    <% end %>
+  </ul>
+</p>
+
+<br>
 
 <form action="/users/<%=@user.slug%>/delete" method="post">
   <input type="hidden" name="_method" value="DELETE" id="hidden">
 
   <input type="submit" value="Delete Account">
 </form>
-
-<h4>My Toy(s):</h4>
-  <ul>
-    <% @user.toys.each do |toy| %>
-      <li><a href="/toys/<%=toy.slug%>"><%=toy.name%></a></li>
-    <% end %>
-  </ul>
-
-
-<br>
