@@ -105,12 +105,14 @@ class UsersController < ApplicationController
   end
 
   # PATCH: /users/5
-  patch "/users/:id" do
-    redirect "/users/:id"
+  patch "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+    @user.update(params[:user])
+    redirect "/users/#{@user.slug}"
   end
 
   # DELETE: /users/5/delete
-  delete "/users/:id/delete" do
+  delete "/users/:slug/delete" do
     redirect "/users"
   end
 

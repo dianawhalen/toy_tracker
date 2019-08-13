@@ -2,4 +2,26 @@
   <%= flash[:message] %>
 <% end %>
 
-<h2>Insert the form to edit an instance of your model here.</h2>
+<h2>Edit Your Profile</h2>
+
+<form action="/users/<%=@user.slug%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <p>
+    <label>Username: </label>
+    <input id="user_username" type="text" name="user[username]" value="<%=@user.username%>">
+  </p>
+
+  <p>
+    <label>Email: </label>
+    <input id="user_email" type="text" name="user[email]" value="<%=@user.email%>">
+  </p>
+
+  <p>
+    <label>Password: </label>
+    <input id="user_password" type="text" name="user[password]" value="<%=@user.password%>">
+  </p>
+
+
+  <input type="submit" value="Save">
+</form>
