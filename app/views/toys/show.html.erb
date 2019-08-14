@@ -10,13 +10,18 @@
   <p><strong>Brand: </strong><%= @toy.brand %></p>
   <p><strong>Belongs to <a href="/users/<%=@toy.user.slug%>"><%=@toy.user.slug.capitalize%></a></strong></p>
 
-
-<form action="/toys/<%=@toy.slug%>/delete" method="post">
-  <input type="hidden" name="_method" value="DELETE" id="hidden">
-
-  <input type="submit" value="Delete Toy">
-</form>
-
-<button onclick="window.location.href = '/toys/<%=@toy.slug%>/edit';">Edit Toy</button>
-
 <button onclick="window.location.href = '/toys/new';">Add New Toy</button>
+
+<br>
+
+<% if @toy.user == current_user %>
+
+  <button onclick="window.location.href = '/toys/<%=@toy.slug%>/edit';">Edit This Toy</button>
+
+  <form action="/toys/<%=@toy.slug%>/delete" method="post">
+    <input type="hidden" name="_method" value="DELETE" id="hidden">
+
+    <input type="submit" value="Delete This Toy">
+  </form>
+
+<% end %>
