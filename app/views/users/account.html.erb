@@ -7,7 +7,15 @@
 
 <button onclick="window.location.href = '/users/<%=@user.slug%>/edit';">Edit Account</button>
 
-<br><br>
+<br>
+
+<form action="/users/<%=@user.slug%>/delete" method="post">
+  <input type="hidden" name="_method" value="DELETE" id="hidden">
+
+  <input type="submit" value="Delete Account">
+</form>
+
+<br>
 
 <h4>My Toy Collection:</h4>
 <p>
@@ -18,10 +26,4 @@
   </ul>
 </p>
 
-<br>
-
-<form action="/users/<%=@user.slug%>/delete" method="post">
-  <input type="hidden" name="_method" value="DELETE" id="hidden">
-
-  <input type="submit" value="Delete Account">
-</form>
+<button onclick="window.location.href = '/toys/new';">Add New Toy</button>
