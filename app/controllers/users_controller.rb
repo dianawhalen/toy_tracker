@@ -117,7 +117,7 @@ class UsersController < ApplicationController
     if @user != current_user
       redirect "/users/#{@user.slug}"
     else
-      @user.toys.delete
+      @user.toys.each {|toy| toy.delete }
       @user.delete
       session.destroy
       redirect "/"

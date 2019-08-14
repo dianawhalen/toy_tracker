@@ -1,12 +1,12 @@
-<% if logged_in? %>
-  <h2>Welcome, <%= current_user.username.capitalize %>!</h2>
+<h2>Welcome, <%= current_user.username.capitalize %>!</h2>
 
 <h4>All Users:</h4>
-  <ul>
-    <% @users.each do |user| %>
-      <li><a href="/users/<%= user.slug %>"><%= user.username.capitalize %></a></li><br>
-    <% end %>
-  </ul>
+  <p>
+    <ul>
+      <% @users.each do |user| %>
+        <li><a href="/users/<%= user.slug %>"><%= user.username.capitalize %></a></li><br>
+      <% end %>
+    </ul>
+  </p>
 
-  <a class="button" href="/toys/new">Add Toy</a>
-<% end %>
+<button onclick="window.location.href = '/toys/new';">Add New Toy</button>

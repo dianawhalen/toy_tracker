@@ -8,6 +8,7 @@
   <p><strong>Color: </strong><%= @toy.color %></p>
   <p><strong>Designer: </strong><%= @toy.designer %></p>
   <p><strong>Brand: </strong><%= @toy.brand %></p>
+  <p><strong>Belongs to <a href="/users/<%=@toy.user.slug%>"><%=@toy.user.slug.capitalize%></a></strong></p>
 
 
 <form action="/toys/<%=@toy.slug%>/delete" method="post">
