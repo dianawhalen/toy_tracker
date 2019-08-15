@@ -40,6 +40,10 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "/toys"
+    elsif
+      @user && params[:password] != @user.password
+      flash[:message] = "Incorrect password!! Try again."
+      redirect "/login"
     else
       redirect "/signup"
     end

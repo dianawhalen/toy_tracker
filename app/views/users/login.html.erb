@@ -1,4 +1,9 @@
+<% if flash.has?(:message) %>
+  <p style="color:red"><%= flash[:message] %></p>
+<% end %>
+
 <h2>Login to Toy Tracker!</h2>
+
 <form method="post" action="/login">
   <input type="text" name="username" placeholder="Username:">
   <input type="text" name="password" placeholder="Password:">
