@@ -49,8 +49,8 @@ class ToysController < ApplicationController
       if @toy.user == current_user
         erb :"/toys/edit.html"
       else
-        flash[:message] = "You cannot edit another user's Toy entry."
-        # redirect "toys/#{@toy.slug}"
+        flash[:message] = "** You may not edit another user's entry **"
+        redirect "toys/#{@toy.slug}"
       end
     else
       redirect "/login"
@@ -67,11 +67,12 @@ class ToysController < ApplicationController
   # DELETE: /toys/5/delete
   delete "/toys/:slug/delete" do
     @toy = Toy.find_by_slug(params[:slug])
-    if @toy.user != current_user
-      flash[:message] = "You cannot delete another user's Toy entry."
-    else
+    if @toy.user == current_user
       @toy.delete
       redirect "/toys"
+    else
+      flash[:message] = "** You may not delete another user's entry **"
+      redirect "toys/#{@toy.slug}"
     end
   end
 
