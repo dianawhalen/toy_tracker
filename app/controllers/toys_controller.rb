@@ -26,6 +26,7 @@ class ToysController < ApplicationController
 
   # POST: /toys
   post "/toys" do
+    #add validation and flash message name may not be blank
     @user = User.find_by_id(session[:user_id])
     @toy = Toy.create(params[:toy])
     @user.toys << @toy
@@ -59,6 +60,7 @@ class ToysController < ApplicationController
 
   # PATCH: /toys/5
   patch "/toys/:slug" do
+    #add user session validation
     @toy = Toy.find_by_slug(params[:slug])
     @toy.update(params[:toy])
     redirect "toys/#{@toy.slug}"

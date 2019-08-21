@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     else
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     end
-    @user.save
+    # @user.save
     session[:user_id] = @user.id
     redirect "/users/#{@user.slug}"
   end
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect "/toys"
     elsif
-      @user && params[:password] != @user.password
+      @user #&& params[:password] != @user.password
       flash[:message] = "Incorrect password!! Try again."
       redirect "/login"
     else
