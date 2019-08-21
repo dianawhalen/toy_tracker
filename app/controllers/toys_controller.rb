@@ -26,11 +26,15 @@ class ToysController < ApplicationController
 
   # POST: /toys
   post "/toys" do
-    #add validation and flash message name may not be blank
-    @user = User.find_by_id(session[:user_id])
-    @toy = Toy.create(params[:toy])
-    @user.toys << @toy
-    redirect "toys/#{@toy.slug}"
+    if !params[:name].blank?
+      @user = User.find_by_id(session[:user_id])
+      @toy = Toy.create(params[:toy])
+      @user.toys << @toy
+      redirect "toys/#{@toy.slug}"
+    else
+      flash[:message] = "** Name may not be blank **"
+      redirect "/toys/new"
+    end
   end
 
   # GET: /toys/5
