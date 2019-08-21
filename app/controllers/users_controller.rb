@@ -41,7 +41,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect "/toys"
     elsif
-      @user #&& params[:password] != @user.password
+      @user
       flash[:message] = "Incorrect password!! Try again."
       redirect "/login"
     else

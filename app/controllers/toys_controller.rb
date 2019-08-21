@@ -60,10 +60,14 @@ class ToysController < ApplicationController
 
   # PATCH: /toys/5
   patch "/toys/:slug" do
-    #add user session validation
     @toy = Toy.find_by_slug(params[:slug])
-    @toy.update(params[:toy])
-    redirect "toys/#{@toy.slug}"
+    if @toy.user == current_user
+      @toy.update(params[:toy])
+      redirect "toys/#{@toy.slug}"
+    else
+      flash[:message] = "** You may not edit another user's entry **"
+      redirect "toys/#{@toy.slug}"
+    end
   end
 
   # DELETE: /toys/5/delete
