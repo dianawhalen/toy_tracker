@@ -117,13 +117,18 @@ class UsersController < ApplicationController
   # PATCH: /users/5
   patch "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
-    if @user == current_user && !params[:user][:username].blank?
-      @user.update(params[:user])
-      redirect "/users/#{@user.slug}"
-    elsif
-      params[:user][:username].blank?
+    if params[:user][:username].blank?
       flash[:message] = "** Username may not be blank **"
       redirect "users/#{@user.slug}/edit"
+    elsif
+      user = User.find_by(:username => params[:user][:username])
+      params[:user][:username] == user.username
+      flash[:message] = "** Username already exists — Please choose another **"
+      redirect "users/#{@user.slug}/edit"
+    elsif
+      @user == current_user && !params[:user][:username].blank?
+      @user.update(params[:user])
+      redirect "/users/#{@user.slug}"
     else
       flash[:message] = "** You may not edit another user's profile **"
       redirect "users/#{@user.slug}"
