@@ -101,7 +101,8 @@ class UsersController < ApplicationController
       if @user == current_user
         erb :"/users/edit.html"
       else
-        flash[:message] = "You cannot edit another user's profile."
+        flash[:message] = "** You may not edit another user's profile **"
+        redirect "users/#{@user.slug}"
       end
     else
       redirect "/login"
