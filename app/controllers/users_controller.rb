@@ -112,8 +112,17 @@ class UsersController < ApplicationController
   # PATCH: /users/5
   patch "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
-    @user.update(params[:user])
-    redirect "/users/#{@user.slug}"
+    if @user == current_user && !params[:user][:username].blank?
+      @user.update(params[:user])
+      redirect "/users/#{@user.slug}"
+    elsif
+      params[:user][:username].blank?
+      flash[:message] = "** Username may not be blank **"
+      redirect "users/#{@user.slug}/edit"
+    else
+      flash[:message] = "** You may not edit another user's profile **"
+      redirect "users/#{@user.slug}"
+    end
   end
 
   # DELETE: /users/5/delete

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :toys
 
   def slug
-    username.gsub(" ", "-").downcase
+    username.gsub(" ", "-").downcase + "#{-id}"
   end
 
   def self.find_by_slug(slug)
