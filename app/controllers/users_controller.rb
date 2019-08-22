@@ -18,9 +18,7 @@ class UsersController < ApplicationController
     if params[:username].blank? || params[:email].blank? || params[:password].blank?
       flash[:message] = "** Fields may not be blank **"
       redirect "/signup"
-    elsif
-      user = User.find_by(:username => params[:username])
-      params[:username] == user.username
+    elsif User.find_by(:username => params[:username])
       flash[:message] = "** Username already exists — Please choose another **"
       redirect "/signup"
     else
@@ -56,12 +54,9 @@ class UsersController < ApplicationController
 
   # GET: /account
   get "/account" do
-    if logged_in?
-      @user = current_user
-      erb :"/users/account.html"
-    else
-      redirect "/login"
-    end
+    redirect_if_not_logged_in
+    @user = current_user
+    erb :"/users/account.html"
   end
 
   # GET: /logout
@@ -76,12 +71,9 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
-    if logged_in?
-      @users = User.all
-      erb :"/users/index.html"
-    else
-      redirect "/login"
-    end
+    redirect_if_not_logged_in
+    @users = User.all
+    erb :"/users/index.html"
   end
 
   # POST: /users
@@ -91,26 +83,20 @@ class UsersController < ApplicationController
 
   # GET: /users/5
   get "/users/:slug" do
-    if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      erb :"/users/show.html"
-    else
-      redirect "/login"
-    end
+    redirect_if_not_logged_in
+    @user = User.find_by_slug(params[:slug])
+    erb :"/users/show.html"
   end
 
   # GET: /users/5/edit
   get "/users/:slug/edit" do
-    if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      if @user == current_user
-        erb :"/users/edit.html"
-      else
-        flash[:message] = "** You may not edit another user's profile **"
-        redirect "users/#{@user.slug}"
-      end
+    redirect_if_not_logged_in
+    @user = User.find_by_slug(params[:slug])
+    if @user == current_user
+      erb :"/users/edit.html"
     else
-      redirect "/login"
+      flash[:message] = "** You may not edit another user's profile **"
+      redirect "users/#{@user.slug}"
     end
   end
 

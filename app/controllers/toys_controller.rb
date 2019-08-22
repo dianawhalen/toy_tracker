@@ -6,22 +6,16 @@ class ToysController < ApplicationController
 
   # GET: /toys
   get "/toys" do
-    if logged_in?
-      @toys = Toy.all
-      erb :"/toys/index.html"
-    else
-      redirect "/login"
-    end
+    redirect_if_not_logged_in
+    @toys = Toy.all
+    erb :"/toys/index.html"
   end
 
   # GET: /toys/new
   get "/toys/new" do
-    if logged_in?
-      @user = User.find_by_id(session[:user_id])
-      erb :"/toys/new.html"
-    else
-      redirect "/login"
-    end
+    redirect_if_not_logged_in
+    @user = User.find_by_id(session[:user_id])
+    erb :"/toys/new.html"
   end
 
   # POST: /toys
@@ -39,26 +33,20 @@ class ToysController < ApplicationController
 
   # GET: /toys/5
   get "/toys/:slug" do
-    if logged_in?
-      @toy = Toy.find_by_slug(params[:slug])
-      erb :"/toys/show.html"
-    else
-      redirect "/login"
-    end
+    redirect_if_not_logged_in
+    @toy = Toy.find_by_slug(params[:slug])
+    erb :"/toys/show.html"
   end
 
   # GET: /toys/5/edit
   get "/toys/:slug/edit" do
-    if logged_in?
-      @toy = Toy.find_by_slug(params[:slug])
-      if @toy.user == current_user
-        erb :"/toys/edit.html"
-      else
-        flash[:message] = "** You may not edit another user's entry **"
-        redirect "toys/#{@toy.slug}"
-      end
+    redirect_if_not_logged_in
+    @toy = Toy.find_by_slug(params[:slug])
+    if @toy.user == current_user
+      erb :"/toys/edit.html"
     else
-      redirect "/login"
+      flash[:message] = "** You may not edit another user's entry **"
+      redirect "toys/#{@toy.slug}"
     end
   end
 

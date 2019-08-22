@@ -3,7 +3,7 @@
 <h4>All Toy Entries:</h4><br>
   <ul>
     <% @toys.each do |toy| %>
-      <li><a href="/toys/<%= toy.slug %>"><%= toy.name %> (<%= toy.edition %>)</a></li><br>
+      <li><a href="/toys/<%= toy.slug %>"><%= toy.name %> (<%= toy.edition %>)</a> Created by: <a href="/users/<%=toy.user.slug%>"><%=toy.user.slug.capitalize%></a></li><br>
     <% end %>
   </ul>
 
