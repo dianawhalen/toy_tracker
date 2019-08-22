@@ -43,8 +43,7 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "/toys"
-    elsif
-      @user
+    elsif @user
       flash[:message] = "Incorrect password!! Try again."
       redirect "/login"
     else
@@ -106,13 +105,10 @@ class UsersController < ApplicationController
     if params[:user][:username].blank?
       flash[:message] = "** Username may not be blank **"
       redirect "users/#{@user.slug}/edit"
-    elsif
-      user = User.find_by(:username => params[:user][:username])
-      params[:user][:username] == user.username
+    elsif User.find_by(:username => params[:user][:username])
       flash[:message] = "** Username already exists — Please choose another **"
       redirect "users/#{@user.slug}/edit"
-    elsif
-      @user == current_user && !params[:user][:username].blank?
+    elsif @user == current_user && !params[:user][:username].blank?
       @user.update(params[:user])
       redirect "/users/#{@user.slug}"
     else
