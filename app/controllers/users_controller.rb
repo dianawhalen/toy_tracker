@@ -16,11 +16,16 @@ class UsersController < ApplicationController
   # POST: /signup
   post "/signup" do
     if params[:username].blank? || params[:email].blank? || params[:password].blank?
+      flash[:message] = "** Fields may not be blank **"
+      redirect "/signup"
+    elsif
+      user = User.find_by(:username => params[:username])
+      params[:username] == user.username
+      flash[:message] = "** Username already exists — Please choose another **"
       redirect "/signup"
     else
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     end
-    # @user.save
     session[:user_id] = @user.id
     redirect "/users/#{@user.slug}"
   end
