@@ -65,9 +65,13 @@ class ToysController < ApplicationController
   # PATCH: /toys/5
   patch "/toys/:slug" do
     @toy = Toy.find_by_slug(params[:slug])
-    if @toy.user == current_user
+    if @toy.user == current_user && !params[:toy][:name].blank?
       @toy.update(params[:toy])
       redirect "toys/#{@toy.slug}"
+    elsif
+      params[:toy][:name].blank?
+      flash[:message] = "** Name may not be blank **"
+      redirect "toys/#{@toy.slug}/edit"
     else
       flash[:message] = "** You may not edit another user's entry **"
       redirect "toys/#{@toy.slug}"
